@@ -34,8 +34,9 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Fore
     private MovieAdapter mAdapter;
     private RecyclerView mMoviesList;
     private ProgressBar mLoadingIndicator;
-    private static String urls = "http://api.themoviedb.org/3/movie/popular";
-    private static String urlr = "http://api.themoviedb.org/3/movie/top_rated";
+    private static String url = "https://api.themoviedb.org/3/movie/550";
+    private static String urls = "https://api.themoviedb.org/3/movie/popular";
+    private static String urlr = "https://api.themoviedb.org/3/movie/top_rated";
     final static String PARAM_QUERY = "api_key";
     private static final String API_KEY = BuildConfig.API_KEY;
     CategorizedMovie[] categorizedMovies;
@@ -55,26 +56,25 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Fore
         mMoviesList.setAdapter(mAdapter);
         goToPop();
     }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
+        getMenuInflater().inflate(R.menu.menu, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        int menuItemThatWasSelected=item.getItemId();
-        if (menuItemThatWasSelected==R.id.action_sort_rating)
-        {
-            go=0;
+        int menuItemThatWasSelected = item.getItemId();
+        if (menuItemThatWasSelected == R.id.action_sort_rating) {
+            go = 0;
             mAdapter.setData(null);
             goToRate();
             return true;
         }
-        if (menuItemThatWasSelected==R.id.action_sort_popularity)
-        {
+        if (menuItemThatWasSelected == R.id.action_sort_popularity) {
             mAdapter.setData(null);
-            go=1;
+            go = 1;
             goToPop();
             return true;
         }
@@ -82,17 +82,17 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Fore
     }
 
     public void goToPop() {
-        mMoviesList.setAdapter(null);
-        categorizedMovies = null;
-        mAdapter.setData(null);
+        /*mMoviesList.setAdapter(null);
+        categorizedMovies = null;*/
+        //mAdapter.setData(null);
         URL query = uriBuilder(urls);
         new queryTask().execute(query);
     }
 
     public void goToRate() {
-        mMoviesList.setAdapter(null);
-        categorizedMovies = null;
-        mAdapter.setData(null);
+        /*mMoviesList.setAdapter(null);
+        categorizedMovies = null;*/
+        //mAdapter.setData(null);
         URL query = uriBuilder(urlr);
         new queryTask().execute(query);
     }
@@ -111,10 +111,10 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Fore
     }
 
     @Override
-    public void onClick(CategorizedMovie categorizedMovieed, int idm) {
+    public void onClick(CategorizedMovie categorizedMovies, int idm) {
         Intent startChildActivityIntent = new Intent(MainActivity.this, DetailActivity.class);
         Bundle extras = new Bundle();
-        extras.putString("ide", categorizedMovieed.ip);
+        extras.putString("ide", categorizedMovies.ip);
         startChildActivityIntent.putExtras(extras);
         startActivity(startChildActivityIntent);
     }
@@ -131,7 +131,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Fore
                         JSONObject jsonObj = new JSONObject(searchResults);
                         JSONArray contacts = jsonObj.getJSONArray("results");
                         categorizedMovies = new CategorizedMovie[contacts.length()];
-                        for (int i = 0; i < contacts.length(); i++) {
+                        for (int i = 0; i <= contacts.length(); i++) {
                             JSONObject c = contacts.getJSONObject(i);
                             String id = c.getString("id");
                             String title = c.getString("title");

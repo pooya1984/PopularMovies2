@@ -15,40 +15,44 @@
         android:layout_height="35dp"
         android:visibility="invisible" />
 
-    <TextView
-        android:id="@+id/titles"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="30dp"
-        android:text="Movie name"
-        android:textColor="#ffffff"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="142dp"
-        tools:layout_editor_absoluteY="16dp" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/images"
-        android:layout_width="114dp"
-        android:layout_height="101dp"
-        android:layout_margin="8dp"
-        android:src="@mipmap/ic_launcher"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        <TextView
+            android:id="@+id/titles"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:padding="30dp"
+            android:text="Movie name"
+            android:textColor="#ffffff"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            tools:ignore="MissingConstraints"
+            tools:layout_editor_absoluteX="142dp"
+            tools:layout_editor_absoluteY="16dp" />
+
+        <ImageView
+            android:id="@+id/images"
+            android:layout_width="114dp"
+            android:layout_height="101dp"
+            android:layout_margin="8dp"
+            android:src="@mipmap/ic_launcher"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="16dp" />
+    </LinearLayout>
 
     <ScrollView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="126dp">
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
-            android:layout_width="133dp"
-            android:layout_height="58dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:orientation="vertical"
-            tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="132dp">
 
@@ -78,6 +82,5 @@
                 android:textSize="15sp" />
         </LinearLayout>
     </ScrollView>
-
 </android.support.constraint.ConstraintLayout>
 

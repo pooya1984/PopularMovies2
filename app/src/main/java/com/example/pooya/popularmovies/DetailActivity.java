@@ -3,8 +3,11 @@ package com.example.pooya.popularmovies;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.support.v4.app.NavUtils;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -23,10 +26,10 @@ import java.util.Scanner;
 
 public class DetailActivity extends AppCompatActivity {
 
-    public static String ur = "http://image.tmdb.org/t/p/w500/";
-
-    private static String urls = "http://api.themoviedb.org/3/movie/popular";
-    private static String urlr = "http://api.themoviedb.org/3/movie/top_rated";
+    public static String ur = "http://image.tmdb.org/t/p/w500";
+    private static String url = "https://api.themoviedb.org/3/movie/550";
+    private static String urls = "https://api.themoviedb.org/3/movie/popular";
+    private static String urlr = "https://api.themoviedb.org/3/movie/top_rated";
     final static String PARAM_QUERY = "api_key";
     private static final String API_KEY = BuildConfig.API_KEY;
     String id;
@@ -48,6 +51,10 @@ public class DetailActivity extends AppCompatActivity {
         textView6 = findViewById(R.id.detail);
         imageView = findViewById(R.id.images);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
+        ActionBar actionBar = this.getSupportActionBar();
+        if (actionBar !=null){
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         intent = getIntent();
         Bundle extras = intent.getExtras();
@@ -64,7 +71,15 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 
-
+    @Override
+    public boolean onOptionsItemSelected (MenuItem item){
+        int id = item.getItemId();
+        // When the home button is pressed, take the user back to the VisualizerActivity
+        if (id == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+        }
+        return super.onOptionsItemSelected(item);
+    }
 
     public URL uriBuilders(String uri) {
         Uri builtUri = Uri.parse(uri).buildUpon()
@@ -78,7 +93,6 @@ public class DetailActivity extends AppCompatActivity {
         }
         return url;
     }
-
 
     private class queryTasks extends AsyncTask<URL, Void, String> {
         @Override
@@ -139,7 +153,6 @@ public class DetailActivity extends AppCompatActivity {
 
         }
     }
-
 
     public static String getResponseFromHttpUrl(URL url) throws IOException {
         HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
