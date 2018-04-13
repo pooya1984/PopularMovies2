@@ -152,7 +152,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Fore
 
         @Override
         protected void onPostExecute(String s) {
-            Log.d("Abhishek", "Chinmaya");
+            Log.d("pooya", "cinema");
             if (s != null && !s.equals("")) {
                 StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
                 mMoviesList.setLayoutManager(layoutManager);
