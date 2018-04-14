@@ -45,14 +45,15 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="16dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="16dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="@id/images"
             tools:layout_editor_absoluteX="26dp"
             tools:layout_editor_absoluteY="132dp">
 
@@ -83,4 +84,3 @@
         </LinearLayout>
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
-

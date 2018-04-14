@@ -31,12 +31,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
 
     public MovieAdapter(ForecastAdapterOnClickHandler clickHandler) {
         mClickHandler = clickHandler;
-
     }
 
     public void setData(CategorizedMovie[] movieCategorizer) {
         movieArray = movieCategorizer;
-
     }
 
     @Override
@@ -52,11 +50,10 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @Override
     public void onBindViewHolder(MovieViewHolder holder, int position) {
 
-        //clickedPosition=position;
+        clickedPosition = position;
         String web = ur + movieArray[position].poster_path;
-        Picasso.with(context).load(web).into(imageView);
-
-
+        Picasso.with(context).load(web).placeholder(R.mipmap.ic_launcher)
+                .error(R.mipmap.error).into(imageView);
     }
 
     @Override
@@ -76,8 +73,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         public void onClick(View view) {
             clickedPosition = getAdapterPosition();
             mClickHandler.onClick(movieArray[clickedPosition], clickedPosition);
-
-
         }
     }
 }

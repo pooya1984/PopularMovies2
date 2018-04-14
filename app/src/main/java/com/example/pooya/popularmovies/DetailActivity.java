@@ -51,8 +51,9 @@ public class DetailActivity extends AppCompatActivity {
         textView6 = findViewById(R.id.detail);
         imageView = findViewById(R.id.images);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
+
         ActionBar actionBar = this.getSupportActionBar();
-        if (actionBar !=null){
+        if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
@@ -60,19 +61,18 @@ public class DetailActivity extends AppCompatActivity {
         Bundle extras = intent.getExtras();
         textEntered = extras.getString("ide");
         help = extras.getInt("democheck");
-        if (help == 1) {
+        if (help < 1) {
             URL query = uriBuilders(urls);
             new queryTasks().execute(query);
 
         } else {
             URL query = uriBuilders(urlr);
             new queryTasks().execute(query);
-
         }
     }
 
     @Override
-    public boolean onOptionsItemSelected (MenuItem item){
+    public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         // When the home button is pressed, take the user back to the VisualizerActivity
         if (id == android.R.id.home) {

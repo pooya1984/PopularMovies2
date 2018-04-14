@@ -34,7 +34,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Fore
     private MovieAdapter mAdapter;
     private RecyclerView mMoviesList;
     private ProgressBar mLoadingIndicator;
-    private static String url = "https://api.themoviedb.org/3/movie/550";
     private static String urls = "https://api.themoviedb.org/3/movie/popular";
     private static String urlr = "https://api.themoviedb.org/3/movie/top_rated";
     final static String PARAM_QUERY = "api_key";
@@ -131,7 +130,7 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Fore
                         JSONObject jsonObj = new JSONObject(searchResults);
                         JSONArray contacts = jsonObj.getJSONArray("results");
                         categorizedMovies = new CategorizedMovie[contacts.length()];
-                        for (int i = 0; i <= contacts.length(); i++) {
+                        for (int i = 0; i < contacts.length(); i++) {
                             JSONObject c = contacts.getJSONObject(i);
                             String id = c.getString("id");
                             String title = c.getString("title");
