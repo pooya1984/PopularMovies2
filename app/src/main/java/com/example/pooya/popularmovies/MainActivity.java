@@ -159,7 +159,6 @@ public class MainActivity extends AppCompatActivity implements MovieAdapter.Fore
                 mLoadingIndicator.setVisibility(View.INVISIBLE);
                 mAdapter.setData(categorizedMovies);
             }
-
         }
 
         @Override

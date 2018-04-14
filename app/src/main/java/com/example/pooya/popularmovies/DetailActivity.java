@@ -52,6 +52,18 @@ public class DetailActivity extends AppCompatActivity {
         imageView = findViewById(R.id.images);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
 
+        /**
+         * I try to add onClickListener to Images in detail xml file
+         */
+        final ImageView button = findViewById(R.id.images);
+        button.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Uri webpage = Uri.parse(url);
+                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+                if (intent.resolveActivity(getPackageManager()) != null) {
+                    startActivity(intent);
+                }            } });
+
         ActionBar actionBar = this.getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
@@ -64,7 +76,6 @@ public class DetailActivity extends AppCompatActivity {
         if (help < 1) {
             URL query = uriBuilders(urls);
             new queryTasks().execute(query);
-
         } else {
             URL query = uriBuilders(urlr);
             new queryTasks().execute(query);
@@ -93,6 +104,22 @@ public class DetailActivity extends AppCompatActivity {
         }
         return url;
     }
+
+    //public void open_web(String url) {
+        /*
+         * We wanted to demonstrate the Uri.parse method because its usage occurs frequently. You
+         * could have just as easily passed in a Uri as the parameter of this method.
+
+        Uri webpage = Uri.parse(url);
+
+
+        Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
+
+        if (intent.resolveActivity(getPackageManager()) != null) {
+            startActivity(intent);
+        }
+    }*/
+
 
     private class queryTasks extends AsyncTask<URL, Void, String> {
         @Override
