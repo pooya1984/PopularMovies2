@@ -9,4 +9,8 @@
     <string name="movie_poster_image">movie poster</string>
     <string name="original_title_title">originally title</string>
     <string name="complete">10</string>
+    <string name="Fragment1">This is ActionBarSherlock Fragment 1</string>
+    <string name="Fragment2">This is ActionBarSherlock Fragment 2</string>
+    <string name="Fragment3">This is ActionBarSherlock Fragment 3</string>
+
 </resources>
