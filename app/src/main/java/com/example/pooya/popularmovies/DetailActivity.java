@@ -41,7 +41,7 @@ public class DetailActivity extends AppCompatActivity {
     int help;
     ImageView imageView;
     Intent intent;
-    TextView textView2, textView3, textView5, textView6;
+    TextView textView2, textView3, textView5, textView6,textView7;
     private ProgressBar mLoadingIndicator;
     String textEntered, title, vote_count, overview, poster_path, release_date, vote_average;
     ActionBar mActionBar;
@@ -80,12 +80,12 @@ public class DetailActivity extends AppCompatActivity {
             public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
                 // Pass the position on tab click to ViewPager
                 mPager.setCurrentItem(tab.getPosition());
+
             }
 
             @Override
             public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
                 // TODO Auto-generated method stub
-
             }
 
             @Override
@@ -132,7 +132,21 @@ public class DetailActivity extends AppCompatActivity {
             URL query = uriBuilders(urlr);
             new queryTasks().execute(query);
         }
+/*
+        textEntered = extras.getString("fide");
+        help = extras.getInt("democheck");
+        if (help < 1) {
+            URL query = uriBuilders(urls);
+            new queryTasks().execute(query);
+        } else {
+            URL query = uriBuilders(urlr);
+            new queryTasks().execute(query);
+        }
+        textView7 = findViewById(R.id.pager);
+        textView7.setText(title);*/
     }
+
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
