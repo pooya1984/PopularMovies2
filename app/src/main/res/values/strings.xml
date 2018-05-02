@@ -12,5 +12,6 @@
     <string name="Fragment1">This is ActionBarSherlock Fragment 1</string>
     <string name="Fragment2">This is ActionBarSherlock Fragment 2</string>
     <string name="Fragment3">FAVORITE MOVIE</string>
+    <string name="favorit">Like</string>
 
 </resources>

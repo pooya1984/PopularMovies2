@@ -3,21 +3,16 @@ package com.example.pooya.popularmovies;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.pooya.popularmovies.adapter.ViewPagerAdapter;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
@@ -29,101 +24,33 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Scanner;
 
-public class DetailActivity extends AppCompatActivity {
-
+class FavoriteActivity extends AppCompatActivity {
     public static String ur = "http://image.tmdb.org/t/p/w500";
     private static String url = "https://api.themoviedb.org/3/movie/550";
     private static String urls = "https://api.themoviedb.org/3/movie/popular";
     private static String urlr = "https://api.themoviedb.org/3/movie/top_rated";
     final static String PARAM_QUERY = "api_key";
     private static final String API_KEY = BuildConfig.API_KEY;
-    private Button fButton;
 
     String id;
     int help;
     ImageView imageView;
     Intent intent;
-    TextView textView2, textView3, textView5, textView6,textView7;
+    TextView textView2, textView3, textView5, textView6;
     private ProgressBar mLoadingIndicator;
     String textEntered, title, vote_count, overview, poster_path, release_date, vote_average;
-    ActionBar mActionBar;
     ActionBar m2ActionBar;
-    ViewPager mPager;
-    ActionBar.Tab tab;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_favorite);
 
-      /*  fButton =  findViewById(R.id.favorite_button);
-        fButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent startChildActivityIntent = new Intent(DetailActivity.this, DetailActivity.class);
-                Bundle extras = new Bundle();
-                extras.putString("ide", categorizedMovies.ip);
-                startChildActivityIntent.putExtras(extras);
-                startActivity(startChildActivityIntent);
-            }
-        });*/
 
-        mActionBar = getSupportActionBar();
-        mActionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
-        mPager = findViewById(R.id.pager);
-        FragmentManager fm = getSupportFragmentManager();
-        ViewPager.SimpleOnPageChangeListener ViewPagerListener = new ViewPager.SimpleOnPageChangeListener() {
-            @Override
-            public void onPageSelected(int position) {
-                super.onPageSelected(position);
-                // Find the ViewPager Position
-                mActionBar.setSelectedNavigationItem(position);
-            }
-        };
-
-        mPager.setOnPageChangeListener(ViewPagerListener);
-        // Locate the adapter class called ViewPagerAdapter.java
-        ViewPagerAdapter viewpageradapter = new ViewPagerAdapter(fm);
-        // Set the View Pager Adapter into ViewPager
-        mPager.setAdapter(viewpageradapter);
-
-        // Capture tab button clicks
-        ActionBar.TabListener tabListener = new ActionBar.TabListener() {
-
-            @Override
-            public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // Pass the position on tab click to ViewPager
-                mPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // TODO Auto-generated method stub
-            }
-
-            @Override
-            public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
-                // TODO Auto-generated method stub
-            }
-        };
-
-        // Create first Tab
-        tab = mActionBar.newTab().setText("Tab1").setTabListener(tabListener);
-        mActionBar.addTab(tab);
-
-        // Create second Tab
-        tab = mActionBar.newTab().setText("Tab2").setTabListener(tabListener);
-        mActionBar.addTab(tab);
-
-        // Create third Tab
-        tab = mActionBar.newTab().setText("Tab3").setTabListener(tabListener);
-        mActionBar.addTab(tab);
-
-        textView2 = findViewById(R.id.titles);
-        textView3 = findViewById(R.id.year);
-        textView5 = findViewById(R.id.rating);
-        textView6 = findViewById(R.id.detail);
-        imageView = findViewById(R.id.images);
+        textView2 = findViewById(R.id.fTitles);
+        textView3 = findViewById(R.id.fYear);
+        textView5 = findViewById(R.id.fRating);
+        imageView = findViewById(R.id.fImages);
         mLoadingIndicator = findViewById(R.id.pb_loading_indicator);
 
         m2ActionBar = this.getSupportActionBar();
@@ -137,23 +64,12 @@ public class DetailActivity extends AppCompatActivity {
         help = extras.getInt("democheck");
         if (help < 1) {
             URL query = uriBuilders(urls);
-            new queryTasks().execute(query);
+            new FavoriteActivity.queryTasks().execute(query);
         } else {
             URL query = uriBuilders(urlr);
-            new queryTasks().execute(query);
+            new FavoriteActivity.queryTasks().execute(query);
         }
-/*
-        textEntered = extras.getString("fide");
-        help = extras.getInt("democheck");
-        if (help < 1) {
-            URL query = uriBuilders(urls);
-            new queryTasks().execute(query);
-        } else {
-            URL query = uriBuilders(urlr);
-            new queryTasks().execute(query);
-        }
-        textView7 = findViewById(R.id.pager);
-        textView7.setText(title);*/
+
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -178,31 +94,7 @@ public class DetailActivity extends AppCompatActivity {
         return url;
     }
 
-    public void go(View view) {
-        Intent startChildActivityIntent = new Intent(DetailActivity.this, FavoriteActivity.class);
-        Bundle extras = new Bundle();
-        extras.putString("ide", this.id);
-        startChildActivityIntent.putExtras(extras);
-    }
 
-    //public void open_web(String url) {
-        /*
-         * We wanted to demonstrate the Uri.parse method because its usage occurs frequently. You
-         * could have just as easily passed in a Uri as the parameter of this method.
-
-    imageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Uri webpage = Uri.parse(url);
-                Log.e("url", "->"+webpage);
-                Intent intent = new Intent(Intent.ACTION_VIEW, webpage);
-                //startActivity(intent);
-                if (intent.resolveActivity(getPackageManager()) != null) {
-                    startActivity(intent);
-                }
-            }
-        });
-    }*/
     private class queryTasks extends AsyncTask<URL, Void, String> {
         @Override
         protected String doInBackground(URL... params) {
@@ -276,3 +168,4 @@ public class DetailActivity extends AppCompatActivity {
         }
     }
 }
+

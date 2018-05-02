@@ -3,13 +3,18 @@ package com.example.pooya.popularmovies.adapter;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ListView;
 
 import com.example.pooya.popularmovies.R;
 
@@ -52,12 +57,26 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     public static class FragmentTab1 extends Fragment {
 
+        RecyclerView recyclerView;
+        @Nullable
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                                 Bundle savedInstanceState) {
-            // Get the view from fragmenttab1.xml
-            View view = inflater.inflate(R.layout.fragmenttab1, container, false);
-            return view;
+        public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+            View rootView = inflater.inflate(
+                    R.layout.fragmenttab1, container, false);
+            return rootView;
+        }
+
+        @Override
+        public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+            super.onViewCreated(view, savedInstanceState);
+
+            String[] items = getResources().getStringArray(R.array.tab_A);
+            FragmentAdapter adapter = new FragmentAdapter(items);
+            recyclerView = view.findViewById(R.id.recycler_tab1);
+            LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+            recyclerView.setLayoutManager(layoutManager);
+            recyclerView.setAdapter(adapter);
+
         }
 
         @Override
